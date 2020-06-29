@@ -20,7 +20,7 @@ function App() {
 
       const response = await axios.get(url);
       const updatedResponse = response.data.slip.advice;
-      if(updatedResponse == advice)
+      if(updatedResponse === advice)
       {
         fetchAdvice();
       }else{
