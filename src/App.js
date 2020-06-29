@@ -5,26 +5,29 @@ import './App.css';
 
 function App() {
   const [advice, setAdvice] = useState(
-    {  
-      id:'4',
-      advise:'he', 
-    });
+      '' 
+    );
   console.log(advice);
 
   const url = 'https://api.adviceslip.com/advice';
 
   useEffect(() => {
-    //fetchAdvice();
+    fetchAdvice();
   },[]);
 
   const fetchAdvice = async () => {
     try{
 
       const response = await axios.get(url);
-      const updatedResponse = response.data.slip;
-      await axios.get('https://api.adviceslip.com/advice')
+      const updatedResponse = response.data.slip.advice;
       console.log(updatedResponse);
-      setAdvice([advice.id == updatedResponse.id, advice.advise == updatedResponse.advice]);
+      if(updatedResponse == advice)
+      {
+        fetchAdvice();
+      }else{
+        setAdvice(updatedResponse);
+      }
+      
     }
       catch(error) {
         console.log(error + " error");
@@ -33,15 +36,15 @@ function App() {
 
 
   const test = () => {
-    setAdvice ([advice.id = 100, advice.advise = 'heyyyy']);
+    setAdvice ('heyyyy');
   }
   
 //<h1 className="heading">{advice}</h1>
   return (
     <div className="app">
         <div className="card">
-        <h1 className="heading">{advice.advise}</h1>
-          <button className="button" onClick={test}>
+        <h1 className="heading">{advice}</h1>
+          <button className="button" onClick={fetchAdvice}>
             <span>GIVE ME ADVICE!</span>
           </button>
         </div>
