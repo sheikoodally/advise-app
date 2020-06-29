@@ -20,7 +20,6 @@ function App() {
 
       const response = await axios.get(url);
       const updatedResponse = response.data.slip.advice;
-      console.log(updatedResponse);
       if(updatedResponse == advice)
       {
         fetchAdvice();
@@ -35,11 +34,6 @@ function App() {
   }
 
 
-  const test = () => {
-    setAdvice ('heyyyy');
-  }
-  
-//<h1 className="heading">{advice}</h1>
   return (
     <div className="app">
         <div className="card">
