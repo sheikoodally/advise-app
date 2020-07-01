@@ -12,7 +12,10 @@ function App() {
   const url = 'https://api.adviceslip.com/advice';
 
   useEffect(() => {
-    fetchAdvice();
+    if(advice === '')
+    {
+      fetchAdvice();
+    }
   },[]);
 
   const fetchAdvice = async () => {
